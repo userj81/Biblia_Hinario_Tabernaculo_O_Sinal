@@ -1,0 +1,13 @@
+# COMANDO PARA INSTALAR BÍBLIA E HINÁRIO AUTOMATICAMENTE
+# Copie e cole este comando no PowerShell (como administrador):
+
+git clone https://github.com/userj81/Biblia_Hinario_Tabernaculo_O_Sinal.git BibliaHinario; cd BibliaHinario; .\setup-completo.ps1
+
+# Instruções:
+# 1. Abra PowerShell como administrador (Win + X → PowerShell Admin)
+# 2. Cole o comando acima e pressione Enter
+# 3. Aguarde a instalação automática
+# 4. Reinicie o computador
+# 5. Pronto! Sistema funcionando!
+
+# Para suporte: leia PARA_USUARIOS_LEIGOS.md

@@ -8,14 +8,31 @@ Este guia é para **pessoas que não entendem muito de computador**. Vamos confi
 
 ## 🚀 Configuração Automática (FAÇA ISSO PRIMEIRO)
 
-### **Passo 1: Execute o Script Mágico**
+### **Opção 1: Comando Único (Mais Fácil!)** ⭐
 
-1. **Clique com botão direito** no arquivo `setup-completo.ps1`
-2. **Selecione** "Executar como administrador"
-3. **Aguarde** a configuração automática
-4. **Pronto!** Tudo configurado
+1. **Abra o PowerShell como administrador:**
+   - Pressione `Win + X`
+   - Selecione "Windows PowerShell (Administrador)"
 
-**O que isso faz:**
+2. **Cole este comando completo e pressione Enter:**
+```powershell
+git clone https://github.com/userj81/Biblia_Hinario_Tabernaculo_O_Sinal.git BibliaHinario; cd BibliaHinario; .\setup-completo.ps1
+```
+
+3. **Aguarde** a instalação automática
+4. **Reinicie** o computador
+5. **Pronto!** Sistema funcionando!
+
+### **Opção 2: Script Mágico (Se o comando acima não funcionar)**
+
+1. **Baixe** o projeto completo
+2. **Clique com botão direito** no arquivo `setup-completo.ps1`
+3. **Selecione** "Executar como administrador"
+4. **Aguarde** a configuração automática
+5. **Pronto!** Tudo configurado
+
+**O que qualquer uma das opções faz:**
+- ✅ Baixa o sistema completo
 - ✅ Configura atualização automática
 - ✅ Configura inicialização automática
 - ✅ Testa se tudo funciona
@@ -179,6 +196,16 @@ Este sistema foi criado com muito carinho para ajudar igrejas a modernizarem sua
 
 ## 📋 Checklist de Configuração
 
+### **Método Comando Único (Recomendado):**
+- [ ] Abriu PowerShell como administrador (Win + X → PowerShell Admin)
+- [ ] Colou o comando: `git clone https://github.com/userj81/Biblia_Hinario_Tabernaculo_O_Sinal.git BibliaHinario; cd BibliaHinario; .\setup-completo.ps1`
+- [ ] Aguardou a instalação automática
+- [ ] Reiniciou o computador
+- [ ] Testou o acesso local (http://localhost:5173)
+- [ ] Descobriu o IP da rede (`ipconfig` no CMD)
+- [ ] Testou o acesso pela rede Wi-Fi
+
+### **Método Arquivo (Alternativo):**
 - [ ] Baixou os arquivos do projeto
 - [ ] Executou `setup-completo.ps1` como administrador
 - [ ] Reiniciou o computador
@@ -187,6 +214,8 @@ Este sistema foi criado com muito carinho para ajudar igrejas a modernizarem sua
 - [ ] Testou o acesso pela rede Wi-Fi
 
 **✅ Tudo funcionando? Parabéns! Sua igreja está modernizada!** 🎉
+
+**💡 Dica:** O comando único é o método mais rápido e fácil!
 
 ---
 

@@ -25,20 +25,48 @@ Sistema de projeção de hinos e versículos bíblicos para igrejas, com control
 
 ## 🚀 Instalação (3 Opções)
 
-### **Opção 1: Configuração COMPLETA Automática (Recomendada para Iniciantes)**
+## ⚡ INSTALAÇÃO ULTRA SIMPLES (1 Comando!)
+
+**Para instalar COMPLETAMENTE o Bíblia e Hinário, copie e cole este comando no PowerShell (como administrador):**
 
 ```powershell
-# Execute apenas este comando como ADMINISTRADOR:
-.\setup-completo.ps1
+git clone https://github.com/userj81/Biblia_Hinario_Tabernaculo_O_Sinal.git BibliaHinario; cd BibliaHinario; .\setup-completo.ps1
 ```
 
 **O que isso faz automaticamente:**
-- ✅ Baixa atualizações do GitHub
-- ✅ Configura inicialização automática
+- ✅ Baixa o repositório completo
+- ✅ Configura sincronização automática com GitHub
+- ✅ Configura inicialização automática ao ligar PC
+- ✅ Instala todas as dependências
 - ✅ Testa tudo automaticamente
-- ✅ Pronto para uso imediato
+- ✅ Sistema sempre na versão mais recente!
+
+### **Como executar:**
+1. **Abra PowerShell como administrador** (Win + X → "Windows PowerShell (Administrador)")
+2. **Cole o comando acima** e pressione Enter
+3. **Aguarde** a instalação automática
+4. **Reinicie** o computador
+5. **Pronto!** Sistema funcionando automaticamente
+
+### **❓ Problemas comuns:**
+
+**"Executar como administrador" não aparece:**
+- Clique direito na barra de tarefas do Windows
+- Procure "Windows PowerShell"
+- Clique direito → "Executar como administrador"
+
+**"Git não é reconhecido":**
+- Baixe Git: https://git-scm.com/
+- Marque "Add to PATH" durante instalação
+- Reinicie PowerShell e tente novamente
+
+**"Execution Policy":**
+- No PowerShell, execute: `Set-ExecutionPolicy RemoteSigned`
+- Confirme com "S" ou "Y"
 
 **Para usuários leigos:** Leia [PARA_USUARIOS_LEIGOS.md](PARA_USUARIOS_LEIGOS.md)
+
+---
 
 ---
 
