@@ -120,14 +120,19 @@ Substitua `192.168.1.X` pelo IP do seu computador:
 
 ### **Para Igrejas (Computador Dedicado):**
 
-Configure o sistema para iniciar automaticamente:
+Configure o sistema para iniciar automaticamente **sempre na versão mais recente**:
 
 ```powershell
 # Execute uma vez como administrador
 .\setup-inicializacao-automatica.ps1
 ```
 
-**Resultado:** O sistema inicia automaticamente sempre que o computador liga!
+**O que acontece:**
+1. 🔄 **Sincroniza** automaticamente com GitHub
+2. ⚙️ **Verifica** sistema e dependências
+3. 🚀 **Inicia** o sistema mais atualizado
+
+**Resultado:** Sempre que o computador liga, o sistema inicia com a versão mais recente!
 
 ### **Para Uso Manual:**
 

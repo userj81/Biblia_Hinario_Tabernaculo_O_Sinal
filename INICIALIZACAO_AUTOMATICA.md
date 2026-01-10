@@ -33,6 +33,8 @@ Execute o script de configuração (como administrador):
    - Propriedades → Atalho
    - Destino: `powershell.exe -ExecutionPolicy Bypass -File "C:\caminho\completo\Start-BibliaHinario.ps1" -Silent`
 
+**Nota:** O script já inclui sincronização automática com GitHub!
+
 ### **Opção 3: Inicialização Manual**
 
 Execute sempre que precisar:
@@ -44,6 +46,21 @@ Execute sempre que precisar:
 # PowerShell (mais avançado)
 .\Start-BibliaHinario.ps1
 ```
+
+---
+
+## 📊 Ordem de Execução
+
+### **Fluxo Automático:**
+1. 🔄 **Sincronização com GitHub** - Busca versão mais recente
+2. ⚙️ **Verificação do Sistema** - Node.js, npm, dependências
+3. 🚀 **Inicialização do Sistema** - Backend e frontend
+
+### **Sempre na Versão Mais Recente:**
+- ✅ Busca atualizações automaticamente
+- ✅ Instala dependências se necessário
+- ✅ Inicia apenas após sincronização
+- ✅ Logs completos de todo o processo
 
 ---
 
@@ -74,12 +91,14 @@ Stop-ScheduledTask -TaskName "Biblia Hinario - Auto Start"
 ## 📊 Scripts Disponíveis
 
 ### **`iniciar-sistema.bat`**
+- ✅ **Sincroniza automaticamente** com GitHub primeiro
 - ✅ Mais simples e direto
 - ✅ Interface visual
 - ✅ Verificações básicas
 - ✅ Ideal para uso manual
 
 ### **`Start-BibliaHinario.ps1`**
+- ✅ **Sincroniza automaticamente** com GitHub primeiro
 - ✅ Verificações avançadas
 - ✅ Logs detalhados
 - ✅ Modo silencioso
@@ -88,7 +107,8 @@ Stop-ScheduledTask -TaskName "Biblia Hinario - Auto Start"
 
 ### **`setup-inicializacao-automatica.ps1`**
 - ✅ Configura Agendador de Tarefas
-- ✅ Inicialização automática
+- ✅ **Inclui sincronização automática**
+- ✅ Inicialização automática da versão mais recente
 - ✅ Recuperação automática
 - ✅ Execute uma vez só
 

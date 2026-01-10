@@ -10,6 +10,15 @@ cd /d "%SCRIPT_DIR%"
 echo 📍 Diretório: %SCRIPT_DIR%
 echo.
 
+REM === PRIMEIRO: SINCRONIZAR COM GITHUB ===
+echo 🔄 Verificando atualizações...
+call "%SCRIPT_DIR%\sync-github.bat"
+echo.
+
+REM === SEGUNDO: VERIFICAR DEPENDÊNCIAS ===
+echo ⚙️ Verificando sistema...
+echo.
+
 REM Verifica se Node.js está instalado
 node --version >nul 2>&1
 if errorlevel 1 (

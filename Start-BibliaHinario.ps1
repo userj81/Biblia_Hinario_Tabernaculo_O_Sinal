@@ -29,6 +29,73 @@ function Write-Log {
     $logMessage | Out-File -FilePath $logPath -Append
 }
 
+# Função para sincronizar com GitHub
+function Sync-WithGitHub {
+    Write-Log "=== INICIANDO SINCRONIZAÇÃO COM GITHUB ==="
+    if (-not $Silent) { Write-Host "🔄 Sincronizando com GitHub..." -ForegroundColor Cyan }
+
+    try {
+        # Verificar se git está disponível
+        $gitVersion = git --version 2>$null
+        if ($LASTEXITCODE -ne 0) {
+            Write-Log "Git não encontrado - pulando sincronização" "WARN"
+            if (-not $Silent) { Write-Host "⚠️  Git não encontrado - pulando sincronização" -ForegroundColor Yellow }
+            return $false
+        }
+
+        # Buscar atualizações do upstream
+        Write-Log "Buscando atualizações do upstream"
+        if (-not $Silent) { Write-Host "📥 Buscando atualizações..." -ForegroundColor Yellow }
+
+        $fetchResult = git fetch upstream 2>&1
+        if ($LASTEXITCODE -ne 0) {
+            Write-Log "ERRO no fetch: $fetchResult" "ERROR"
+            if (-not $Silent) { Write-Host "❌ Erro ao buscar atualizações" -ForegroundColor Red }
+            return $false
+        }
+
+        # Verificar se há mudanças
+        $localCommit = git rev-parse HEAD 2>$null
+        $remoteCommit = git rev-parse upstream/main 2>$null
+
+        if ($localCommit -ne $remoteCommit) {
+            Write-Log "Atualizações encontradas. Fazendo merge..."
+            if (-not $Silent) { Write-Host "📋 Atualizações encontradas! Fazendo merge..." -ForegroundColor Green }
+
+            # Fazer merge
+            $mergeResult = git merge upstream/main --no-edit 2>&1
+            if ($LASTEXITCODE -eq 0) {
+                Write-Log "Merge realizado com sucesso"
+
+                # Verificar se package.json foi modificado
+                $changedFiles = git diff HEAD~1 --name-only 2>$null
+                if ($changedFiles -match "package.json") {
+                    Write-Log "Atualizando dependências npm"
+                    if (-not $Silent) { Write-Host "📦 Atualizando dependências..." -ForegroundColor Yellow }
+                    npm install 2>$null | Out-Null
+                }
+
+                if (-not $Silent) { Write-Host "✅ Sincronização concluída!" -ForegroundColor Green }
+                Write-Log "Sincronização concluída com sucesso"
+                return $true
+            } else {
+                Write-Log "ERRO no merge: $mergeResult" "ERROR"
+                if (-not $Silent) { Write-Host "❌ Erro no merge automático" -ForegroundColor Red }
+                return $false
+            }
+        } else {
+            Write-Log "Repositório já está atualizado"
+            if (-not $Silent) { Write-Host "✅ Repositório já está atualizado" -ForegroundColor Green }
+            return $true
+        }
+
+    } catch {
+        Write-Log "ERRO na sincronização: $($_.Exception.Message)" "ERROR"
+        if (-not $Silent) { Write-Host "❌ Erro na sincronização: $($_.Exception.Message)" -ForegroundColor Red }
+        return $false
+    }
+}
+
 if (-not $Silent) {
     Write-Host "🚀 Iniciando Bíblia e Hinário v2.0" -ForegroundColor Cyan
     Write-Host "=====================================" -ForegroundColor Cyan
@@ -37,6 +104,13 @@ if (-not $Silent) {
 }
 
 Write-Log "Iniciando script de inicialização"
+
+# === PRIMEIRO: SINCRONIZAR COM GITHUB ===
+$syncResult = Sync-WithGitHub
+Write-Log "Resultado da sincronização: $syncResult"
+
+# === SEGUNDO: VERIFICAR DEPENDÊNCIAS ===
+Write-Log "=== VERIFICANDO DEPENDÊNCIAS ==="
 
 # Verifica se Node.js está instalado
 try {
