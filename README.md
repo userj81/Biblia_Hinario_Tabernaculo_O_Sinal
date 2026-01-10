@@ -17,6 +17,9 @@ Sistema de projeção de hinos e versículos bíblicos para igrejas, com control
 - 🔐 **Sistema de Login** - Protege o painel de controle
 - ⚡ **Tempo Real** - Mudanças instantâneas via Socket.io
 - 💾 **100% Offline** - Funciona sem internet após instalação
+- 🌐 **Acesso pela Rede** - Scripts automáticos para links de acesso
+- 📋 **Documentação Completa** - Guias detalhados de instalação e uso
+- 🔧 **Ferramentas de Diagnóstico** - Scripts para verificar funcionamento
 
 ---
 
@@ -24,7 +27,7 @@ Sistema de projeção de hinos e versículos bíblicos para igrejas, com control
 
 ```bash
 # 1. Clone o repositório
-git clone https://github.com/userj81/Biblia_Hin-rio_2.0.git
+git clone https://github.com/userj81/Biblia_Hinario_Tabernaculo_O_Sinal.git
 
 # 2. Entre na pasta
 cd Biblia_Hin-rio_2.0
