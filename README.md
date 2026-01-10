@@ -59,6 +59,14 @@ npm run dev
 - Resolver problemas de merge e conflitos
 - Configurar sincronização programada
 
+### **[🤖 SINCRONIZAÇÃO AUTOMÁTICA](SINCRONIZACAO_AUTOMATICA.md)**
+
+**Configure uma vez e esqueça:**
+- Sincronização automática ao ligar o computador
+- Scripts inteligentes que rodam em background
+- Logs detalhados de todas as operações
+- Configuração fácil com Agendador de Tarefas
+
 ---
 
 ## 🌐 Acesso ao Sistema
