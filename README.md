@@ -39,6 +39,21 @@ npm install
 npm run dev
 ```
 
+**💡 Ou use os scripts de inicialização automática:**
+```batch
+# Script simples (Batch)
+.\iniciar-sistema.bat
+
+# Script avançado (PowerShell)
+.\Start-BibliaHinario.ps1
+```
+
+**🚀 Para inicialização automática ao ligar o computador:**
+```powershell
+# Execute como administrador (uma vez só)
+.\setup-inicializacao-automatica.ps1
+```
+
 ---
 
 ## 📚 Documentação Completa
@@ -98,6 +113,35 @@ Substitua `192.168.1.X` pelo IP do seu computador:
    - Navegue com os botões ou setas
 
 3. **Ambos na mesma rede Wi-Fi** ✅
+
+---
+
+## ⚡ Inicialização Automática
+
+### **Para Igrejas (Computador Dedicado):**
+
+Configure o sistema para iniciar automaticamente:
+
+```powershell
+# Execute uma vez como administrador
+.\setup-inicializacao-automatica.ps1
+```
+
+**Resultado:** O sistema inicia automaticamente sempre que o computador liga!
+
+### **Para Uso Manual:**
+
+```batch
+# Script simples
+.\iniciar-sistema.bat
+
+# Script avançado (com logs)
+.\Start-BibliaHinario.ps1
+```
+
+### **[📖 Guia Completo de Inicialização](INICIALIZACAO_AUTOMATICA.md)**
+
+Saiba mais sobre todas as opções de inicialização automática.
 
 ---
 
@@ -356,6 +400,11 @@ npm run dev:client
 
 # Parar servidor
 # Pressione Ctrl+C no terminal
+
+# Scripts de inicialização automática
+.\iniciar-sistema.bat              # Script simples
+.\Start-BibliaHinario.ps1          # Script avançado
+.\setup-inicializacao-automatica.ps1  # Configurar automático
 
 # Verificar se tudo está funcionando
 npm list
