@@ -23,7 +23,26 @@ Sistema de projeção de hinos e versículos bíblicos para igrejas, com control
 
 ---
 
-## 🚀 Instalação Rápida
+## 🚀 Instalação (3 Opções)
+
+### **Opção 1: Configuração COMPLETA Automática (Recomendada para Iniciantes)**
+
+```powershell
+# Execute apenas este comando como ADMINISTRADOR:
+.\setup-completo.ps1
+```
+
+**O que isso faz automaticamente:**
+- ✅ Baixa atualizações do GitHub
+- ✅ Configura inicialização automática
+- ✅ Testa tudo automaticamente
+- ✅ Pronto para uso imediato
+
+**Para usuários leigos:** Leia [PARA_USUARIOS_LEIGOS.md](PARA_USUARIOS_LEIGOS.md)
+
+---
+
+### **Opção 2: Instalação Manual**
 
 ```bash
 # 1. Clone o repositório
@@ -39,16 +58,19 @@ npm install
 npm run dev
 ```
 
-**💡 Ou use os scripts de inicialização automática:**
+---
+
+### **Opção 3: Scripts de Inicialização**
+
 ```batch
-# Script simples (Batch)
+# Inicialização simples (recomendado)
 .\iniciar-sistema.bat
 
-# Script avançado (PowerShell)
+# Inicialização avançada (com logs)
 .\Start-BibliaHinario.ps1
 ```
 
-**🚀 Para inicialização automática ao ligar o computador:**
+**Para inicialização automática ao ligar PC:**
 ```powershell
 # Execute como administrador (uma vez só)
 .\setup-inicializacao-automatica.ps1
@@ -57,6 +79,14 @@ npm run dev
 ---
 
 ## 📚 Documentação Completa
+
+### **[👶 GUIA PARA USUÁRIOS LEIGOS](PARA_USUARIOS_LEIGOS.md)**
+
+**Comece por aqui se:**
+- Não entende muito de computador
+- Quer configuração automática completa
+- É pastor/técnico de igreja
+- Quer solução "aponte e clique"
 
 ### **[➡️ GUIA DE INSTALAÇÃO DETALHADO](INSTALACAO.md)**
 
@@ -73,6 +103,14 @@ npm run dev
 - Arquitetura do sistema
 - Metodologia de desenvolvimento
 - Cronograma e fases do projeto
+
+### **[⚙️ SCRIPTS DE CONFIGURAÇÃO]**
+
+**Scripts inteligentes incluídos:**
+- `setup-completo.ps1` - **Configuração completa automática (recomendado para todos)**
+- `setup-auto-sync.ps1` - Sincronização automática com GitHub
+- `setup-inicializacao-automatica.ps1` - Inicialização automática ao ligar PC
+- Scripts de inicialização e diagnóstico para uso diário
 
 ---
 
