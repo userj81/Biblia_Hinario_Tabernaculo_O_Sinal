@@ -51,6 +51,14 @@ npm run dev
 - Precisa acessar pela rede Wi-Fi
 - Quer entender como funciona
 
+### **[🔄 GUIA DE SINCRONIZAÇÃO COM GITHUB](SINCRONIZACAO.md)**
+
+**Leia este guia para:**
+- Manter seu repositório sempre atualizado
+- Usar scripts automáticos de sincronização
+- Resolver problemas de merge e conflitos
+- Configurar sincronização programada
+
 ---
 
 ## 🌐 Acesso ao Sistema
