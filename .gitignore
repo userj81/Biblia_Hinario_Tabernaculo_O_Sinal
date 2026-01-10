@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+.npm-cache/
+
+# Build output
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Database (manter o bh.db mas ignorar outros)
+# data/bh.db - NÃO ignorar, é necessário para o projeto
+

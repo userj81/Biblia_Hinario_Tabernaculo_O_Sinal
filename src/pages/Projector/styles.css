@@ -1,0 +1,564 @@
+/* ====================================
+   PROJECTOR STYLES
+   Diferenciação entre Hinos e Bíblia
+   ==================================== */
+
+/* Font Face */
+@font-face {
+  font-family: 'VAG Rundschrift';
+  src: url('/fonts/VAG.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ====================================
+   CONTAINER BASE
+   ==================================== */
+.projector-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: all 0.5s ease;
+  cursor: none;
+}
+
+.projector-container:hover {
+  cursor: default;
+}
+
+/* ====================================
+   ESTILO HINO (type: 'hino')
+   - Fundo preto VAZIO na parte superior
+   - Texto do hino ESTÁTICO na barra musical colorida inferior
+   - Cada linha = 1 slide (muda ao pressionar seta)
+   ==================================== */
+.projector-hino {
+  background-color: #000000 !important;
+  background-image: none !important;
+  padding: 0;
+}
+
+/* Esconde o conteúdo central - o texto vai na barra */
+.projector-hino .slide-content {
+  display: none !important;
+}
+
+/* Barra Musical com texto do hino ESTÁTICO - ELEVADA */
+.music-bar {
+  position: fixed;
+  bottom: 60px; /* Mais elevado para dar mais espaço */
+  left: 40px;
+  right: 40px;
+  height: 200px; /* AUMENTADO: de 140px para 200px */
+  background: linear-gradient(90deg,
+    #9333EA 0%,
+    #6366F1 20%,
+    #0EA5E9 50%,
+    #14B8A6 80%,
+    #10B981 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 100;
+  border-radius: 20px;
+  /* Transparência leve nas bordas superior e inferior */
+  box-shadow:
+    0 -20px 40px rgba(0, 0, 0, 0.3),
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 60px rgba(0, 0, 0, 0.2);
+}
+
+.music-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    rgba(255,255,255,0.4) 0%, 
+    rgba(255,255,255,0.8) 50%, 
+    rgba(255,255,255,0.4) 100%
+  );
+}
+
+/* Decoração de notas musicais nos cantos */
+.music-bar::after {
+  content: '🎵 ♪ 🎶';
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 36px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Container do texto - ESTÁTICO e CENTRALIZADO */
+.music-bar-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0 80px; /* REDUZIDO: de 100px para 80px para dar mais espaço */
+  position: relative;
+  z-index: 1;
+  /* SEM ANIMAÇÃO - texto fica parado */
+}
+
+/* Notas musicais decorativas à esquerda */
+.music-notes {
+  position: absolute;
+  left: 30px;
+  font-size: 36px;
+  opacity: 0.4;
+}
+
+/* Texto do hino na barra - USA VARIÁVEL CSS */
+.music-bar-text {
+  font-family: 'VAG Rundschrift', 'Segoe UI', Arial, sans-serif;
+  font-size: var(--fonte-hino, 48px); /* Usa variável CSS ou fallback */
+  font-weight: 600;
+  color: #FFFFFF;
+  text-align: center;
+  text-shadow:
+    3px 3px 6px rgba(0,0,0,0.8),
+    0 0 30px rgba(255,255,255,0.4);
+  line-height: 1.4; /* MELHORADO: de 1.3 para 1.4 */
+  animation: fadeIn 0.3s ease;
+  white-space: pre-line; /* RESPEITA quebras de linha \n */
+  word-wrap: break-word; /* Quebra palavras longas */
+  max-height: 160px; /* Limita altura para não estourar */
+  overflow: hidden; /* Corta texto excessivo */
+}
+
+/* Refrão em dourado brilhante */
+.music-bar-text.refrain {
+  color: #FFD700;
+  font-style: italic;
+  text-shadow: 
+    3px 3px 6px rgba(0,0,0,0.8),
+    0 0 20px rgba(255, 215, 0, 0.6),
+    0 0 40px rgba(255, 215, 0, 0.3);
+}
+
+/* Indicador de slide para hinos - OCULTO */
+.projector-hino .slide-indicator {
+  display: none !important;
+}
+
+/* ====================================
+   ESTILO BÍBLIA (type: 'verse')
+   - Fundo azul com gradiente
+   - Card RESPONSIVO que se adapta à tela
+   - Texto nunca corta
+   ==================================== */
+.projector-verse {
+  background: linear-gradient(135deg, #1a365d 0%, #2563eb 50%, #1e40af 100%);
+  background-size: cover;
+  background-position: center;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.projector-verse .slide-content {
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem 3rem;
+  width: auto;
+  max-width: 94%;
+  max-height: 80vh; /* Limita altura para não estourar */
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: slideIn 0.4s ease-out;
+  overflow: hidden;
+}
+
+.projector-verse .slide-line {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  /* Usa variável CSS com clamp para responsividade */
+  font-size: clamp(36px, var(--fonte-versiculo, 80px), 120px);
+  color: #FFFFFF;
+  line-height: 1.35;
+  margin: 0.3rem 0;
+  font-weight: 400;
+  text-shadow: 
+    3px 3px 6px rgba(0,0,0,0.7),
+    0 0 30px rgba(255,255,255,0.2);
+  animation: fadeIn 0.4s ease;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+/* Indicador de slide para versículos - OCULTO */
+.projector-verse .slide-indicator {
+  display: none !important;
+}
+
+/* Número do versículo destacado - RESPONSIVO */
+.verse-number {
+  display: inline-block;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-size: clamp(24px, 3vw, 40px);
+  font-weight: 700;
+  color: #FFD700;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 8px 16px;
+  border-radius: 50%;
+  margin-right: 15px;
+  vertical-align: super;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+.verse-reference {
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-size: clamp(20px, 2.5vw, 36px);
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 10px 20px;
+  border-radius: 30px;
+}
+
+/* Indicador de parte quando versículo é dividido */
+.verse-part {
+  font-size: 0.7em;
+  opacity: 0.7;
+  font-weight: 400;
+}
+
+/* Responsivo para versículos - aumentado 30% */
+@media (max-width: 1280px) {
+  .projector-verse .slide-line {
+    font-size: 73px; /* 56 * 1.3 */
+  }
+  .verse-number {
+    font-size: 31px;
+  }
+  .verse-reference {
+    font-size: 31px;
+  }
+}
+
+@media (max-width: 768px) {
+  .projector-verse .slide-line {
+    font-size: 47px; /* 36 * 1.3 */
+  }
+  .verse-number {
+    font-size: 23px;
+  }
+  .verse-reference {
+    font-size: 23px;
+  }
+}
+
+/* ====================================
+   ESTILO ANÚNCIO (type: 'anuncio')
+   - Slide de anúncio de leitura bíblica
+   - Nome do leitor e referências
+   ==================================== */
+.projector-anuncio {
+  background: linear-gradient(135deg, #065f46 0%, #047857 50%, #059669 100%);
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.anuncio-content {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+  padding: 4rem 5rem;
+  max-width: 80%;
+  text-align: center;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  animation: slideIn 0.5s ease-out;
+}
+
+.anuncio-header {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: var(--fonte-versiculo, 48px); /* USA CONFIGURAÇÃO */
+  color: #FFD700;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-shadow:
+    3px 3px 6px rgba(0,0,0,0.7),
+    0 0 30px rgba(255, 215, 0, 0.3);
+}
+
+.anuncio-referencias {
+  margin-bottom: 2.5rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.anuncio-ref {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: var(--fonte-versiculo, 56px); /* USA CONFIGURAÇÃO */
+  color: #FFFFFF;
+  margin: 0.5rem 0;
+  font-weight: 500;
+  text-shadow:
+    2px 2px 4px rgba(0,0,0,0.7),
+    0 0 20px rgba(255,255,255,0.2);
+  animation: fadeInUp 0.4s ease-out;
+}
+
+.anuncio-nome {
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-size: var(--fonte-hino, 40px); /* USA CONFIGURAÇÃO */
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Responsivo para anúncios - USA VARIÁVEIS CSS */
+@media (max-width: 1280px) {
+  .anuncio-content {
+    padding: 3rem 4rem;
+  }
+  /* Tamanhos controlados pelas variáveis CSS */
+}
+
+@media (max-width: 768px) {
+  .anuncio-content {
+    padding: 2rem 3rem;
+    max-width: 90%;
+  }
+  /* Tamanhos controlados pelas variáveis CSS */
+}
+
+/* ====================================
+   ESTILO PADRÃO (fallback)
+   ==================================== */
+.projector-default {
+  background: linear-gradient(135deg, #001529 0%, #003366 100%);
+  padding: 4rem;
+}
+
+.projector-default .slide-content {
+  background-color: rgba(192, 192, 192, 0.15);
+  padding: 3rem 4rem;
+  border-radius: 15px;
+  max-width: 90%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.projector-default .slide-line {
+  font-family: 'VAG Rundschrift', 'Segoe UI', Arial, sans-serif;
+  font-size: 52px;
+  color: #FFFFFF;
+  line-height: 1.5;
+  margin: 0.4rem 0;
+  text-shadow: 
+    2px 2px 0 rgba(0,0,0,1), 
+    -2px -2px 0 rgba(0,0,0,1), 
+    2px -2px 0 rgba(0,0,0,1), 
+    -2px 2px 0 rgba(0,0,0,1);
+}
+
+/* ====================================
+   BLACKOUT
+   ==================================== */
+.blackout-screen {
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  animation: fadeIn 0.3s ease;
+}
+
+/* ====================================
+   EMPTY STATE
+   ==================================== */
+.empty-slide {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.empty-message {
+  font-size: 2rem;
+  opacity: 0.5;
+}
+
+/* ====================================
+   HELP MESSAGE (modo view-only)
+   ==================================== */
+.help-message {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Quando tem barra musical, ajustar posição */
+.projector-hino .help-message {
+  bottom: 120px;
+}
+
+/* ====================================
+   SLIDE INDICATOR
+   ==================================== */
+.slide-indicator {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 2rem;
+  background: rgba(0, 0, 0, 0.6);
+  color: rgba(255, 255, 255, 0.8);
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  z-index: 1000;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.projector-hino .slide-indicator {
+  bottom: 120px;
+}
+
+/* ====================================
+   ANIMAÇÕES
+   ==================================== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ====================================
+   RESPONSIVE - Telas menores
+   ==================================== */
+@media (max-width: 1280px) {
+  .projector-hino .slide-line {
+    font-size: 42px;
+  }
+
+  .projector-verse .slide-line {
+    font-size: 80px;
+  }
+
+  .music-bar {
+    height: 160px; /* AJUSTADO: proporcional aos 200px originais */
+  }
+
+  .music-bar-text {
+    font-size: 26px;
+    max-height: 120px; /* AJUSTADO proporcionalmente */
+  }
+
+  .projector-hino {
+    padding-bottom: 110px; /* AJUSTADO: maior que antes */
+  }
+
+  .projector-hino .help-message,
+  .projector-hino .slide-indicator {
+    bottom: 140px; /* AJUSTADO */
+  }
+}
+
+@media (max-width: 768px) {
+  .projector-hino .slide-line {
+    font-size: 32px;
+  }
+
+  .projector-verse .slide-line {
+    font-size: 50px;
+  }
+
+  .verse-reference {
+    font-size: 24px;
+  }
+
+  .music-bar {
+    height: 140px; /* AJUSTADO: proporcional aos 200px originais */
+    left: 20px;
+    right: 20px;
+  }
+
+  .music-bar-text {
+    font-size: 20px;
+    max-height: 100px; /* AJUSTADO proporcionalmente */
+  }
+
+  .music-bar-content {
+    padding: 0 40px; /* MENOR padding para telas pequenas */
+  }
+
+  .projector-hino {
+    padding-bottom: 90px; /* AJUSTADO */
+  }
+
+  .projector-hino .help-message,
+  .projector-hino .slide-indicator {
+    bottom: 110px; /* AJUSTADO */
+  }
+}
+

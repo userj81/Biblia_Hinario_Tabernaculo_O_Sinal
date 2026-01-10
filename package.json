@@ -1,0 +1,46 @@
+{
+  "name": "biblia-hinario-v2",
+  "version": "2.0.0",
+  "description": "Sistema de controle de projeção para igrejas - Bíblia e Hinário v2",
+  "type": "module",
+  "main": "server/index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "node server/index.js",
+    "dev:client": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "biblia",
+    "hinario",
+    "projecao",
+    "igreja"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@fastify/cookie": "^9.1.0",
+    "@fastify/cors": "^8.4.0",
+    "@fastify/static": "^6.12.0",
+    "@fastify/websocket": "^8.3.0",
+    "better-sqlite3": "^12.5.0",
+    "fastify": "^4.24.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.20.1",
+    "socket.io": "^4.7.2",
+    "socket.io-client": "^4.7.2",
+    "zustand": "^4.4.7"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.16",
+    "concurrently": "^8.2.2",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.3.6",
+    "vite": "^5.0.8"
+  }
+}

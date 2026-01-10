@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Links de Acesso - Bíblia e Hinário v2.0</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .ip-info {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+        .ip-info strong {
+            color: #667eea;
+            font-size: 18px;
+        }
+        .links-section {
+            margin-bottom: 30px;
+        }
+        .link-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .link-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .link-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .link-card a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 16px;
+            word-break: break-all;
+            display: block;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            transition: all 0.2s;
+        }
+        .link-card a:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 8px;
+            transition: background 0.2s;
+        }
+        .copy-btn:hover {
+            background: #5568d3;
+        }
+        .info-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .info-box strong {
+            color: #856404;
+        }
+        .local-links {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+        .local-links h3 {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📖 Bíblia e Hinário v2.0</h1>
+        <p class="subtitle">Links de acesso pela rede local</p>
+        
+        <div class="ip-info">
+            <strong>IP Local: 192.168.1.72</strong>
+        </div>
+
+        <div class="links-section">
+            <div class="link-card">
+                <h3>🎛️ Painel de Controle (Admin)</h3>
+                <a href="http://192.168.1.72:5173/admin" id="admin-link" target="_blank">
+                    http://192.168.1.72:5173/admin
+                </a>
+                <button class="copy-btn" onclick="copyLink('admin-link')">Copiar Link</button>
+            </div>
+
+            <div class="link-card">
+                <h3>🖥️ Tela de Projeção</h3>
+                <a href="http://192.168.1.72:5173/projetor" id="projetor-link" target="_blank">
+                    http://192.168.1.72:5173/projetor
+                </a>
+                <button class="copy-btn" onclick="copyLink('projetor-link')">Copiar Link</button>
+            </div>
+        </div>
+
+        <div class="local-links">
+            <h3>Acesso Local (mesmo computador):</h3>
+            <div class="link-card">
+                <a href="http://localhost:5173/admin" target="_blank">
+                    http://localhost:5173/admin
+                </a>
+            </div>
+            <div class="link-card">
+                <a href="http://localhost:5173/projetor" target="_blank">
+                    http://localhost:5173/projetor
+                </a>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <strong>⚠️ Importante:</strong><br>
+            • Senha padrão: <strong>admin123</strong><br>
+            • Todos os dispositivos devem estar na mesma rede Wi-Fi<br>
+            • O servidor deve estar rodando (npm run dev)
+        </div>
+    </div>
+
+    <script>
+        function copyLink(linkId) {
+            const link = document.getElementById(linkId);
+            const text = link.textContent.trim();
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✓ Copiado!';
+                btn.style.background = '#28a745';
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '#667eea';
+                }, 2000);
+            }).catch(err => {
+                alert('Erro ao copiar. Tente selecionar e copiar manualmente.');
+            });
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
