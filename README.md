@@ -29,8 +29,8 @@ Sistema de projeção de hinos e versículos bíblicos para igrejas, com control
 # 1. Clone o repositório
 git clone https://github.com/userj81/Biblia_Hinario_Tabernaculo_O_Sinal.git
 
-# 2. Entre na pasta
-cd Biblia_Hin-rio_2.0
+# 2. Entre na pasta do projeto
+cd Biblia_Hinario_Tabernaculo_O_Sinal
 
 # 3. Instale as dependências
 npm install
@@ -51,21 +51,13 @@ npm run dev
 - Precisa acessar pela rede Wi-Fi
 - Quer entender como funciona
 
-### **[🔄 GUIA DE SINCRONIZAÇÃO COM GITHUB](SINCRONIZACAO.md)**
+### **[📋 GUIA DE DESENVOLVIMENTO](docs/)**
 
-**Leia este guia para:**
-- Manter seu repositório sempre atualizado
-- Usar scripts automáticos de sincronização
-- Resolver problemas de merge e conflitos
-- Configurar sincronização programada
-
-### **[🤖 SINCRONIZAÇÃO AUTOMÁTICA](SINCRONIZACAO_AUTOMATICA.md)**
-
-**Configure uma vez e esqueça:**
-- Sincronização automática ao ligar o computador
-- Scripts inteligentes que rodam em background
-- Logs detalhados de todas as operações
-- Configuração fácil com Agendador de Tarefas
+**Para desenvolvedores:**
+- Documentação técnica completa
+- Arquitetura do sistema
+- Metodologia de desenvolvimento
+- Cronograma e fases do projeto
 
 ---
 
@@ -345,11 +337,8 @@ npm install
 
 ## 📖 Documentação Adicional
 
-- **[INSTALACAO.md](INSTALACAO.md)** - Guia completo de instalação
-- **[docs/DOCUMENTACAO_LEGADO.md](docs/DOCUMENTACAO_LEGADO.md)** - Sistema original Java
-- **[docs/PLAN_NOVA_VERSAO.md](docs/PLAN_NOVA_VERSAO.md)** - Arquitetura da nova versão
-- **[docs/metodologia/](docs/metodologia/)** - Metodologia de desenvolvimento
-- **[docs/cronograma/](docs/cronograma/)** - Cronograma e fases
+- **[INSTALACAO.md](INSTALACAO.md)** - Guia completo de instalação e configuração
+- **[docs/](docs/)** - Documentação técnica e desenvolvimento
 
 ---
 
@@ -368,34 +357,9 @@ npm run dev:client
 # Parar servidor
 # Pressione Ctrl+C no terminal
 
-# Atualizar projeto do GitHub
-git pull origin main
-npm install
-
-# Verificar status do Git
-git status
+# Verificar se tudo está funcionando
+npm list
 ```
-
----
-
-## 🔐 Segurança
-
-### **Senha Padrão:**
-- **Login:** `admin123`
-
-### **Alterar Senha:**
-
-Edite `server/auth.js`:
-```javascript
-const DEFAULT_PASSWORD = 'SUA_SENHA_AQUI';
-```
-
-Ou crie `.env`:
-```env
-ADMIN_PASSWORD=sua-senha-segura
-```
-
-⚠️ **Sempre altere a senha padrão em produção!**
 
 ---
 
@@ -434,15 +398,26 @@ ADMIN_PASSWORD=sua-senha-segura
 
 ## 🤝 Contribuindo
 
-Contribuições são bem-vindas!
+Contribuições são bem-vindas! Este projeto é mantido pela comunidade para igrejas.
 
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/MinhaFeature`)
-3. Commit suas mudanças (`git commit -m 'Adiciona MinhaFeature'`)
-4. Push para a branch (`git push origin feature/MinhaFeature`)
-5. Abra um Pull Request
+### **Como contribuir:**
+1. **Relate bugs** - Abra uma [Issue](https://github.com/userj81/Biblia_Hinario_Tabernaculo_O_Sinal/issues) descrevendo o problema
+2. **Sugira melhorias** - Compartilhe suas ideias para novos recursos
+3. **Ajude na documentação** - Melhore guias e tutoriais
+
+### **Para desenvolvedores:**
+- Consulte a [documentação técnica](docs/) antes de contribuir
+- Siga os padrões de código estabelecidos
+- Teste suas mudanças antes de enviar
 
 ---
+
+## 🔒 Privacidade e Segurança
+
+- ✅ **100% Offline** - Não coleta dados pessoais
+- ✅ **Código Aberto** - Transparente e auditável
+- ✅ **Local** - Dados ficam no seu computador
+- ✅ **Seguro** - Sem telemetria ou rastreamento
 
 ## 📄 Licença
 
@@ -478,9 +453,9 @@ Uso livre para igrejas e comunidades religiosas.
 
 **🔗 Links Importantes:**
 
-- 🌐 **Repositório GitHub:** https://github.com/userj81/Biblia_Hin-rio_2.0
+- 🌐 **Repositório GitHub:** https://github.com/userj81/Biblia_Hinario_Tabernaculo_O_Sinal
 - 📚 **Guia de Instalação:** [INSTALACAO.md](INSTALACAO.md)
-- 📖 **Documentação:** [docs/](docs/)
+- 📖 **Documentação Técnica:** [docs/](docs/)
 
 ---
 
