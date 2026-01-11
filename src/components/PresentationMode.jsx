@@ -163,11 +163,12 @@ export default function PresentationMode({ onExit }) {
   const slideType = currentSlide.type || 'default';
   const isHino = slideType === 'hino';
   const isVerse = slideType === 'verse';
+  const isCurso = slideType === 'curso';
   const isAnuncio = slideType === 'anuncio';
   
   const containerClass = `projector-container ${
-    isHino ? 'projector-hino' : 
-    isVerse ? 'projector-verse' : 
+    isHino ? 'projector-hino' :
+    (isVerse || isCurso) ? 'projector-verse' :
     isAnuncio ? 'projector-anuncio' :
     'projector-default'
   }`;

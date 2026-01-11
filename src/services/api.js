@@ -139,6 +139,45 @@ export const api = {
   },
 
   // ==========================================
+  // CURSO
+  // ==========================================
+  async getLivrosCurso() {
+    return request('/curso/livros');
+  },
+
+  async getLivroCurso(id) {
+    return request(`/curso/livros/${id}`);
+  },
+
+  async getSlidesCurso(livroId) {
+    return request(`/curso/slides?livro_id=${livroId}`);
+  },
+
+  async getSlideCurso(livroId, slideId) {
+    return request(`/curso/slide?livro_id=${livroId}&slide_id=${slideId}`);
+  },
+
+  async getSlidesLivro(livroId) {
+    return request(`/curso/livros/${livroId}/slides`);
+  },
+
+  async searchCurso(query) {
+    return request(`/curso/search?q=${encodeURIComponent(query)}`);
+  },
+
+  async uploadPDFCurso(livroId, pdfFile) {
+    const formData = new FormData();
+    formData.append('pdf', pdfFile);
+    formData.append('livro_id', livroId);
+
+    return request('/curso/upload', {
+      method: 'POST',
+      headers: {}, // Não definir Content-Type para FormData
+      body: formData,
+    });
+  },
+
+  // ==========================================
   // CONFIGURAÇÕES
   // ==========================================
   async getSettings() {
