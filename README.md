@@ -20,7 +20,7 @@ Sistema de projeção de hinos e versículos bíblicos para igrejas, com control
 - 🌐 **Acesso pela Rede** - Scripts automáticos para links de acesso
 - 📋 **Documentação Completa** - Guias detalhados de instalação e uso
 - 🔧 **Ferramentas de Diagnóstico** - Scripts para verificar funcionamento
-- 🔠 **Texto em Maiúsculas** - Versículos e hinos sempre em CAIXA ALTA
+- 🔠 **TODO TEXTO EM MAIÚSCULAS** - Versículos, hinos e anúncios sempre em CAIXA ALTA
 
 ---
 
