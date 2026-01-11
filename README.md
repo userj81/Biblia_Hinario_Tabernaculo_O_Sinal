@@ -10,7 +10,6 @@ Sistema de projeção de hinos e versículos bíblicos para igrejas, com control
 
 - 🎵 **Projeção de Hinos** - Múltiplos hinários suportados
 - 📖 **Projeção de Bíblia** - Todos os livros da Bíblia Sagrada
-- 📚 **Projeção de Cursos** - Material didático com slides gerados automaticamente
 - 📢 **Anúncios de Leitura** - Anuncie versículos e leitores
 - 📱 **Controle Remoto** - Controle via tablet, celular ou notebook
 - 🖥️ **Projeção Profissional** - Compatível com datashow, Smart TV, vMix e Profimix
@@ -21,7 +20,7 @@ Sistema de projeção de hinos e versículos bíblicos para igrejas, com control
 - 🌐 **Acesso pela Rede** - Scripts automáticos para links de acesso
 - 📋 **Documentação Completa** - Guias detalhados de instalação e uso
 - 🔧 **Ferramentas de Diagnóstico** - Scripts para verificar funcionamento
-- 🔠 **TODO TEXTO EM MAIÚSCULAS** - Versículos, hinos, anúncios e cursos sempre em CAIXA ALTA
+- 🔠 **TODO TEXTO EM MAIÚSCULAS** - Versículos, hinos e anúncios sempre em CAIXA ALTA
 
 ---
 
@@ -141,20 +140,6 @@ npm run dev
 - `setup-auto-sync.ps1` - Sincronização automática com GitHub
 - `setup-inicializacao-automatica.ps1` - Inicialização automática ao ligar PC
 - Scripts de inicialização e diagnóstico para uso diário
-
----
-
-## 🎨 Fundo dos Slides
-
-**O fundo dos slides é obtido de:**
-- **Arquivo:** `public/images/fundo.jpg` (fundo principal)
-- **Diretório:** `public/images/` (imagens de fundo)
-- **Asset padrão:** Fundo azul claro para Bíblia/Cursos, cinza escuro para hinos
-
-**Para alterar o fundo:**
-1. Substitua o arquivo `public/images/fundo.jpg`
-2. Reinicie o servidor para aplicar as mudanças
-3. O fundo será usado automaticamente em todos os slides de Bíblia e Cursos
 
 ---
 

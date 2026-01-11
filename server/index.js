@@ -7,7 +7,6 @@ import { fileURLToPath } from 'url';
 import hinariosRoutes from './routes/hinarios.js';
 import hinosRoutes from './routes/hinos.js';
 import bibliaRoutes from './routes/biblia.js';
-import cursoRoutes from './routes/curso.js';
 import authRoutes from './routes/auth.js';
 import settingsRoutes from './routes/settings.js';
 import leiturasRoutes from './routes/leituras.js';
@@ -47,7 +46,6 @@ const start = async () => {
     await fastify.register(hinariosRoutes, { prefix: '/api/hinarios' });
     await fastify.register(hinosRoutes, { prefix: '/api/hinos' });
     await fastify.register(bibliaRoutes, { prefix: '/api/biblia' });
-    await fastify.register(cursoRoutes, { prefix: '/api/curso' });
     await fastify.register(settingsRoutes, { prefix: '/api/settings' });
     await fastify.register(leiturasRoutes, { prefix: '/api/leituras' });
     await fastify.register(anunciosRoutes, { prefix: '/api/anuncios' });

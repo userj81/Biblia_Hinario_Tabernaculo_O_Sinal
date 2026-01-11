@@ -79,26 +79,12 @@ const queries = {
   createAnuncio: db.prepare('INSERT INTO anuncios (nome, titulo) VALUES (?, ?)'),
   updateAnuncio: db.prepare('UPDATE anuncios SET nome = ?, titulo = ? WHERE id = ?'),
   deleteAnuncio: db.prepare('DELETE FROM anuncios WHERE id = ?'),
-
+  
   // Versículos dos anúncios
   getAnuncioVersiculos: db.prepare('SELECT id, anuncio_id, livro_id, livro_nome, capitulo, versiculo_inicio, versiculo_fim, ordem FROM anuncio_versiculos WHERE anuncio_id = ? ORDER BY ordem'),
   addAnuncioVersiculo: db.prepare('INSERT INTO anuncio_versiculos (anuncio_id, livro_id, livro_nome, capitulo, versiculo_inicio, versiculo_fim, ordem) VALUES (?, ?, ?, ?, ?, ?, ?)'),
   deleteAnuncioVersiculos: db.prepare('DELETE FROM anuncio_versiculos WHERE anuncio_id = ?'),
   deleteAnuncioVersiculo: db.prepare('DELETE FROM anuncio_versiculos WHERE id = ?'),
-
-  // ==========================================
-  // CURSO
-  // ==========================================
-  getAllLivrosCurso: db.prepare('SELECT id, nome FROM curso_livros ORDER BY id'),
-  getLivroCursoById: db.prepare('SELECT id, nome FROM curso_livros WHERE id = ?'),
-  searchLivrosCursoByName: db.prepare('SELECT id, nome FROM curso_livros WHERE nome LIKE ? ORDER BY id'),
-  getSlidesByLivroCurso: db.prepare('SELECT id, livro_id, numero, texto FROM curso_slides WHERE livro_id = ? ORDER BY numero'),
-  getSlideByLivroSlide: db.prepare('SELECT id, livro_id, numero, texto FROM curso_slides WHERE livro_id = ? AND numero = ?'),
-  searchSlidesByText: db.prepare('SELECT cs.id, cs.livro_id, cs.numero, cs.texto, cl.nome as livro_nome FROM curso_slides cs JOIN curso_livros cl ON cs.livro_id = cl.id WHERE cs.texto LIKE ? ORDER BY cs.livro_id, cs.numero LIMIT 50'),
-  createLivroCurso: db.prepare('INSERT INTO curso_livros (nome) VALUES (?)'),
-  createSlideCurso: db.prepare('INSERT INTO curso_slides (livro_id, numero, texto) VALUES (?, ?, ?)'),
-  deleteLivroCurso: db.prepare('DELETE FROM curso_livros WHERE id = ?'),
-  deleteSlidesCurso: db.prepare('DELETE FROM curso_slides WHERE livro_id = ?'),
 };
 
 /**

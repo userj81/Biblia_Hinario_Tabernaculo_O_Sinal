@@ -43,7 +43,6 @@ export default function SlidePreview({ compact = false }) {
   const currentIndex = (currentSlide.currentSlideIndex || 0) + 1;
   const isHino = currentSlide.type === 'hino';
   const isVerse = currentSlide.type === 'verse';
-  const isCurso = currentSlide.type === 'curso';
   const isAnuncio = currentSlide.type === 'anuncio';
 
   // Modo compacto para mobile
@@ -75,7 +74,7 @@ export default function SlidePreview({ compact = false }) {
       {/* Preview Header */}
       <div className="bg-gray-50 px-4 py-2 border-b border-gray-100 flex justify-between items-center">
         <span className="text-xs font-medium text-gray-500">
-          {isHino ? '🎵 Hino' : isCurso ? '📚 Curso' : isAnuncio ? '📢 Anúncio' : '📖 Bíblia'}
+          {isHino ? '🎵 Hino' : isAnuncio ? '📢 Anúncio' : '📖 Bíblia'}
         </span>
         {totalSlides > 0 && (
           <span className="text-xs text-gray-400">
@@ -85,7 +84,7 @@ export default function SlidePreview({ compact = false }) {
       </div>
       
       {/* Preview Content */}
-      <div
+      <div 
         className={`p-4 min-h-[180px] flex flex-col justify-center ${
           isHino ? 'bg-gray-900' : isAnuncio ? 'bg-green-900' : 'bg-blue-50'
         }`}
