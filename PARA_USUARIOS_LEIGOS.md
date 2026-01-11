@@ -23,7 +23,7 @@ git clone https://github.com/userj81/Biblia_Hinario_Tabernaculo_O_Sinal.git Bibl
 4. **Reinicie** o computador
 5. **Pronto!** Sistema funcionando!
 
-### **Opção 2: Script Automático (Se o comando acima não funcionar)**
+### **Opção 2: Script Mágico (Se o comando acima não funcionar)**
 
 1. **Baixe** o projeto completo
 2. **Clique com botão direito** no arquivo `setup-completo.ps1`

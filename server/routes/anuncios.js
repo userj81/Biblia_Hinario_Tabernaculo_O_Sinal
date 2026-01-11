@@ -1,4 +1,4 @@
-import { queries } from '../db.js';
+import { queries, converterParaMaiusculas } from '../db.js';
 
 /**
  * Rotas para Anúncios de Leitura
@@ -262,9 +262,9 @@ async function anunciosRoutes(fastify, options) {
           referencias,
           slide: {
             type: 'anuncio',
-            text: referencias.join('\n'),
+            text: converterParaMaiusculas(referencias.join('\n')),
             metadata: {
-              nome: nomeCompleto,
+              nome: converterParaMaiusculas(nomeCompleto),
               titulo: anuncio.titulo,
               referencias,
             },

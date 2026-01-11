@@ -1,4 +1,4 @@
-import { queries } from '../db.js';
+import { queries, converterParaMaiusculas } from '../db.js';
 
 async function bibliaRoutes(fastify, options) {
   // GET /api/biblia/livros - Lista todos os livros da Bíblia
@@ -66,10 +66,16 @@ async function bibliaRoutes(fastify, options) {
         parseInt(capitulo)
       );
 
+      // CONVERTER TEXTOS DOS VERSÍCULOS PARA CAIXA ALTA (MAIÚSCULAS)
+      const versiculosMaiusculos = versiculos.map(versiculo => ({
+        ...versiculo,
+        texto: converterParaMaiusculas(versiculo.texto)
+      }));
+
       return {
         success: true,
-        data: versiculos,
-        count: versiculos.length,
+        data: versiculosMaiusculos,
+        count: versiculosMaiusculos.length,
       };
     } catch (error) {
       fastify.log.error(error);
@@ -108,9 +114,15 @@ async function bibliaRoutes(fastify, options) {
         };
       }
 
+      // CONVERTER TEXTO DO VERSÍCULO PARA CAIXA ALTA (MAIÚSCULAS)
+      const versiculoMaiusculo = {
+        ...versiculoData,
+        texto: converterParaMaiusculas(versiculoData.texto)
+      };
+
       return {
         success: true,
-        data: versiculoData,
+        data: versiculoMaiusculo,
       };
     } catch (error) {
       fastify.log.error(error);
@@ -180,15 +192,21 @@ async function bibliaRoutes(fastify, options) {
       // Buscar nos versículos
       const versiculos = queries.searchVersiculosByText.all(termo);
 
+      // CONVERTER TEXTOS DOS VERSÍCULOS PARA CAIXA ALTA (MAIÚSCULAS)
+      const versiculosMaiusculos = versiculos.map(versiculo => ({
+        ...versiculo,
+        texto: converterParaMaiusculas(versiculo.texto)
+      }));
+
       return {
         success: true,
         data: {
           livros,
-          versiculos,
+          versiculos: versiculosMaiusculos,
         },
         count: {
           livros: livros.length,
-          versiculos: versiculos.length,
+          versiculos: versiculosMaiusculos.length,
         },
       };
     } catch (error) {

@@ -1,5 +1,30 @@
 # 📝 Changelog - Atualizações Realizadas
 
+## Data: 15/12/2024
+
+### 🔠 **Nova Funcionalidade: Texto em Maiúsculas (CAIXA ALTA)**
+
+#### **O que foi implementado:**
+- ✅ **Função `converterParaMaiusculas()`** criada em `server/db.js`
+- ✅ **Versículos da Bíblia** convertidos para maiúsculas em todas as rotas
+- ✅ **Hinos** convertidos para maiúsculas na função `processarHinoEmSlides()`
+- ✅ **Anúncios de leitura** exibidos em maiúsculas
+- ✅ **Leituras salvas** projetadas em maiúsculas
+- ✅ **Script de teste** `teste-caixa-alta.js` criado para verificação
+
+#### **Arquivos modificados:**
+- `server/db.js` - Função de conversão + processamento de hinos
+- `server/routes/biblia.js` - Versículos convertidos
+- `server/routes/leituras.js` - Leituras convertidas
+- `server/routes/anuncios.js` - Anúncios convertidos
+
+#### **Impacto:**
+- Todos os textos exibidos no projetor agora aparecem em **MAIÚSCULAS**
+- Melhor legibilidade para projeção em telas grandes
+- Padrão consistente em todo o sistema
+
+---
+
 ## Data: 14/12/2024
 
 ### 🔧 Correções Técnicas

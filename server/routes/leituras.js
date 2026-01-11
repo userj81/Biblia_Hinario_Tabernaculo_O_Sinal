@@ -1,4 +1,4 @@
-import { queries } from '../db.js';
+import { queries, converterParaMaiusculas } from '../db.js';
 
 /**
  * Rotas para Leituras Salvas
@@ -227,7 +227,7 @@ async function leiturasRoutes(fastify, options) {
         
         textos.forEach(t => {
           slides.push({
-            text: t.texto,
+            text: converterParaMaiusculas(t.texto),
             versiculo: t.versiculo,
             livro: ref.livro_nome,
             capitulo: ref.capitulo,

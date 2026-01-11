@@ -88,17 +88,31 @@ const queries = {
 };
 
 /**
+ * Converte texto para CAIXA ALTA (maiúsculas)
+ * @param {string} texto - Texto a ser convertido
+ * @returns {string} Texto em maiúsculas
+ */
+export function converterParaMaiusculas(texto) {
+  if (!texto) return texto;
+  return texto.toUpperCase();
+}
+
+/**
  * Processa o texto de um hino e divide em slides
  * Regras:
  * - CADA LINHA = 1 SLIDE
  * - Linhas que começam com * são refrão/coro (marcadas como isRefrain)
  * - Linhas vazias são ignoradas
  * - Linhas muito longas (> 60 chars) são divididas automaticamente
+ * - TODO TEXTO É CONVERTIDO PARA CAIXA ALTA (MAIÚSCULAS)
  * @param {string} texto - Texto completo do hino
  * @returns {Array} Array de slides, cada slide contém { text, isRefrain }
  */
 export function processarHinoEmSlides(texto) {
   if (!texto) return [];
+
+  // CONVERTER TODO TEXTO PARA CAIXA ALTA (MAIÚSCULAS)
+  texto = converterParaMaiusculas(texto);
 
   const slides = [];
 
