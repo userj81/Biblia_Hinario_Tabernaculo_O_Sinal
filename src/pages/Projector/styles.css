@@ -91,17 +91,7 @@
   );
 }
 
-/* Decoração de notas musicais nos cantos */
-.music-bar::after {
-  content: '🎵 ♪ 🎶';
-  position: absolute;
-  right: 30px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 36px;
-  opacity: 0.4;
-  pointer-events: none;
-}
+/* Decoração removida - apenas texto */
 
 /* Container do texto - ESTÁTICO e CENTRALIZADO */
 .music-bar-content {
@@ -109,18 +99,15 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 0 80px; /* REDUZIDO: de 100px para 80px para dar mais espaço */
+  padding: 0 40px; /* Menos padding para mais espaço para o texto */
   position: relative;
   z-index: 1;
   /* SEM ANIMAÇÃO - texto fica parado */
 }
 
-/* Notas musicais decorativas à esquerda */
+/* Notas musicais decorativas - REMOVIDAS */
 .music-notes {
-  position: absolute;
-  left: 30px;
-  font-size: 36px;
-  opacity: 0.4;
+  display: none;
 }
 
 /* Texto do hino na barra - USA VARIÁVEL CSS */
@@ -133,12 +120,12 @@
   text-shadow:
     3px 3px 6px rgba(0,0,0,0.8),
     0 0 30px rgba(255,255,255,0.4);
-  line-height: 1.4; /* MELHORADO: de 1.3 para 1.4 */
+  line-height: 1.3;
   animation: fadeIn 0.3s ease;
-  white-space: pre-line; /* RESPEITA quebras de linha \n */
+  white-space: normal; /* PERMITE quebra de linha automática */
   word-wrap: break-word; /* Quebra palavras longas */
-  max-height: 160px; /* Limita altura para não estourar */
-  overflow: hidden; /* Corta texto excessivo */
+  overflow-wrap: break-word; /* Garante quebra de palavras */
+  /* SEM max-height e SEM overflow:hidden - texto não é cortado */
 }
 
 /* Refrão em dourado brilhante */

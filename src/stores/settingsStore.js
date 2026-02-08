@@ -5,6 +5,7 @@ import { api } from '../services/api';
 /**
  * Store para gerenciar configurações do sistema
  * Inclui fórmula matemática para ajuste automático baseado no tamanho da tela
+ * E suporte para ajuste MANUAL de fontes
  */
 export const useSettingsStore = create(
   persist(
@@ -14,6 +15,7 @@ export const useSettingsStore = create(
       fonteVersiculo: 86,
       fonteHino: 65,
       charsPorSlide: 168,
+      modoFonteManual: false, // NOVO: toggle entre automático e manual
       loading: false,
       error: null,
       
@@ -24,13 +26,27 @@ export const useSettingsStore = create(
           const response = await api.getSettings();
           if (response.success && response.data) {
             const tamanho = parseInt(response.data.tamanho_tela) || 55;
-            // Recalcular valores baseado no tamanho salvo
-            const calculated = get().calculateValues(tamanho);
-            set({
-              tamanhoTela: tamanho,
-              ...calculated,
-              loading: false,
-            });
+            const modoManual = response.data.modo_fonte_manual === 'true';
+            
+            // Se modo manual, usar valores salvos; se não, recalcular
+            if (modoManual && response.data.fonte_hino && response.data.fonte_versiculo) {
+              set({
+                tamanhoTela: tamanho,
+                fonteHino: parseInt(response.data.fonte_hino) || 65,
+                fonteVersiculo: parseInt(response.data.fonte_versiculo) || 86,
+                charsPorSlide: parseInt(response.data.chars_por_slide) || 168,
+                modoFonteManual: true,
+                loading: false,
+              });
+            } else {
+              const calculated = get().calculateValues(tamanho);
+              set({
+                tamanhoTela: tamanho,
+                ...calculated,
+                modoFonteManual: false,
+                loading: false,
+              });
+            }
           }
         } catch (error) {
           console.error('Erro ao carregar configurações:', error);
@@ -53,9 +69,10 @@ export const useSettingsStore = create(
         return { fonteVersiculo, fonteHino, charsPorSlide };
       },
       
-      // Atualizar tamanho da tela e recalcular
+      // Atualizar tamanho da tela e recalcular (apenas se modo automático)
       setTamanhoTela: async (tamanho) => {
-        const calculated = get().calculateValues(tamanho);
+        const state = get();
+        const calculated = state.modoFonteManual ? {} : state.calculateValues(tamanho);
         set({
           tamanhoTela: tamanho,
           ...calculated,
@@ -66,6 +83,54 @@ export const useSettingsStore = create(
           await api.updateSetting('tamanho_tela', tamanho);
         } catch (error) {
           console.error('Erro ao salvar configuração:', error);
+        }
+      },
+      
+      // NOVO: Alternar entre modo automático e manual
+      setModoFonteManual: async (manual) => {
+        const state = get();
+        
+        if (!manual) {
+          // Voltando para modo automático: recalcular valores
+          const calculated = state.calculateValues(state.tamanhoTela);
+          set({
+            modoFonteManual: false,
+            ...calculated,
+          });
+        } else {
+          // Entrando em modo manual: manter valores atuais
+          set({ modoFonteManual: true });
+        }
+        
+        // Salvar preferência no servidor
+        try {
+          await api.updateSetting('modo_fonte_manual', manual ? 'true' : 'false');
+        } catch (error) {
+          console.error('Erro ao salvar modo de fonte:', error);
+        }
+      },
+      
+      // NOVO: Definir fonte do hino manualmente
+      setFonteHino: async (size) => {
+        const clampedSize = Math.max(30, Math.min(150, size));
+        set({ fonteHino: clampedSize });
+        
+        try {
+          await api.updateSetting('fonte_hino', clampedSize);
+        } catch (error) {
+          console.error('Erro ao salvar fonte do hino:', error);
+        }
+      },
+      
+      // NOVO: Definir fonte do versículo manualmente
+      setFonteVersiculo: async (size) => {
+        const clampedSize = Math.max(40, Math.min(200, size));
+        set({ fonteVersiculo: clampedSize });
+        
+        try {
+          await api.updateSetting('fonte_versiculo', clampedSize);
+        } catch (error) {
+          console.error('Erro ao salvar fonte do versículo:', error);
         }
       },
       
@@ -86,6 +151,7 @@ export const useSettingsStore = create(
         fonteVersiculo: state.fonteVersiculo,
         fonteHino: state.fonteHino,
         charsPorSlide: state.charsPorSlide,
+        modoFonteManual: state.modoFonteManual,
       }),
     }
   )

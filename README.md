@@ -89,18 +89,108 @@ npm run dev
 
 ---
 
-### **Opção 3: Scripts de Inicialização**
+### **Opção 3: Scripts de Inicialização Multiplataforma**
+
+O sistema oferece scripts robustos de inicialização para **Windows** e **macOS/Linux**, com funcionalidades avançadas.
+
+#### **🪟 Para Windows:**
+
+```powershell
+# Script robusto com todas as funcionalidades (RECOMENDADO)
+.\iniciar-tabernaculo.ps1
+```
+
+#### **🍎 Para macOS/Linux:**
+
+```bash
+# Script robusto equivalente ao Windows
+./iniciar-tabernaculo.sh
+```
+
+#### **✨ Funcionalidades dos Scripts Robustos (v2.1):**
+
+Ambos os scripts incluem:
+
+- ✅ **Verificação de pré-requisitos** - Node.js, npm, Git
+- ✅ **Sistema de logs completo** - Arquivo timestamped para debug
+- ✅ **IP da rede automático** - Mostra links para acesso remoto
+- ✅ **Auto-abertura do navegador** - Abre `/admin` automaticamente
+- ✅ **Retry inteligente** - Até 3 tentativas se falhar
+- ✅ **Barra de progresso visual** - Mostra status Backend/Frontend
+- ✅ **Instalação automática** - Roda `npm install` se necessário
+- ✅ **Sincronização Git** - Atualiza do repositório automaticamente
+- ✅ **Mensagens de erro detalhadas** - Com soluções práticas
+- ✅ **Limpeza de processos** - Remove sessões anteriores
+
+#### **📊 Exemplo de Saída:**
+
+```
+==============================================
+  BIBLIA E HINARIO - TABERNACULO v2.1.0
+==============================================
+
+[1/6] Verificando pre-requisitos...
+   Node.js: v18.17.0 ✓
+   npm: v9.6.7 ✓
+   Git: git version 2.39.0 ✓
+   package.json: OK ✓
+
+[2/6] Limpando processos anteriores...
+   Nenhum processo anterior encontrado
+
+[3/6] Sincronizando com GitHub...
+   Sincronizado com origin/main ✓
+
+[4/6] Verificando dependencias...
+   Dependencias ja instaladas ✓
+
+[5/6] Iniciando servidores...
+   [==============================] 100% | Backend:OK Frontend:OK | 15s
+
+[6/6] Sistema pronto! ✓
+
+   ███████╗██╗   ██╗ ██████╗███████╗███████╗███████╗ ██████╗
+   ██╔════╝██║   ██║██╔════╝██╔════╝██╔════╝██╔════╝██╔═══██╗
+   ███████╗██║   ██║██║     █████╗  ███████╗███████╗██║   ██║
+   ╚════██║██║   ██║██║     ██╔══╝  ╚════██║╚════██║██║   ██║
+   ███████║╚██████╔╝╚██████╗███████╗███████║███████║╚██████╔╝
+   ╚══════╝ ╚═════╝  ╚═════╝╚══════╝╚══════╝╚══════╝ ╚═════╝
+
+ LINKS DE ACESSO LOCAL:
+   Controle:  http://localhost:5173/admin
+   Projecao:  http://localhost:5173/projetor
+
+ ACESSO DA REDE (outros dispositivos):
+   Controle:  http://192.168.1.100:5173/admin
+   Projecao:  http://192.168.1.100:5173/projetor
+
+ STATUS:
+   Backend:  http://localhost:3000 [OK]
+   Frontend: http://localhost:5173 [OK]
+   Log:      /tmp/BibliaHinario-20241207-153045.log
+
+ Navegador aberto automaticamente! ✓
+```
+
+#### **📝 Arquivo de Log:**
+
+Cada execução gera um log completo em:
+- **Windows:** `%TEMP%\BibliaHinario-AAAAMMDD-HHMMSS.log`
+- **macOS/Linux:** `/tmp/BibliaHinario-AAAAMMDD-HHMMSS.log`
+
+Útil para diagnóstico de problemas!
+
+#### **🔧 Scripts Alternativos (Windows):**
 
 ```batch
-# Inicialização com Feedback Visual (Recomendado)
-.\iniciar-sistema.bat
-
-# Inicialização avançada (PowerShell)
-.\Start-BibliaHinario.ps1
+# Scripts mais simples (sem recursos avançados)
+.\iniciar-sistema.bat              # Básico
+.\Start-BibliaHinario.ps1          # Intermediário
+.\Start-WithFeedback.ps1           # Com feedback visual
 ```
 
 > [!TIP]
-> **Novo Recurso:** O sistema agora conta com um script de feedback visual (`Start-WithFeedback.ps1`) que exibe uma barra de progresso e confirmação verde quando o sistema está online e pronto para uso.
+> **Recomendação:** Use `iniciar-tabernaculo.ps1` (Windows) ou `iniciar-tabernaculo.sh` (macOS) para melhor experiência!
 
 ---
 
@@ -330,12 +420,17 @@ biblia-hinario_2.0/
 │   ├── fonts/                 # Fontes personalizadas
 │   └── images/                # Imagens de fundo
 │
-├── docs/                       # Documentação
+├── docs/                       # Documentação (.md e .html)
+├── scripts/                    # Scripts PowerShell e Batch
+├── tests/                      # Scripts de teste
+├── installers/                 # Executáveis de instalação
 │
+├── index.html                 # Entrada principal da aplicação
+├── iniciar-tabernaculo.ps1    # 🪟 Script robusto Windows v2.1
+├── iniciar-tabernaculo.sh     # 🍎 Script robusto macOS/Linux v2.1
 ├── package.json               # Dependências do projeto
 ├── vite.config.js            # Configuração Vite
 ├── tailwind.config.js        # Configuração Tailwind
-├── INSTALACAO.md             # 📚 GUIA DE INSTALAÇÃO COMPLETO
 └── README.md                 # Este arquivo
 ```
 
@@ -501,9 +596,9 @@ npm list
 - ❌ Internet Explorer
 
 ### **Sistemas Operacionais:**
-- ✅ Windows 10/11
-- ✅ macOS 10.15+
-- ✅ Linux (Ubuntu 20.04+)
+- ✅ Windows 10/11 - Use `iniciar-tabernaculo.ps1`
+- ✅ macOS 10.15+ - Use `iniciar-tabernaculo.sh`
+- ✅ Linux (Ubuntu 20.04+) - Use `iniciar-tabernaculo.sh`
 
 ### **Dispositivos:**
 - ✅ Desktop/Laptop
@@ -566,6 +661,20 @@ Uso livre para igrejas e comunidades religiosas.
 
 ## 📝 Changelog
 
+### **v2.1.0** (Fevereiro 2025)
+- ✨ **Scripts de inicialização robustos multiplataforma**
+  - `iniciar-tabernaculo.ps1` (Windows)
+  - `iniciar-tabernaculo.sh` (macOS/Linux)
+- 🔍 Verificação completa de pré-requisitos
+- 📝 Sistema de logs timestamped
+- 🌐 Detecção automática de IP da rede
+- 🚀 Auto-abertura do navegador
+- 🔄 Retry inteligente (até 3 tentativas)
+- 📊 Barra de progresso com status Backend/Frontend
+- ⚙️ Instalação automática de dependências
+- 🔧 Sincronização Git automática
+- 📁 Organização de arquivos em pastas (docs/, scripts/, tests/, installers/)
+
 ### **v2.0.0** (Dezembro 2024)
 - ✨ Reconstrução completa do sistema em Node.js e React
 - ✨ Interface moderna e responsiva
@@ -587,4 +696,4 @@ Uso livre para igrejas e comunidades religiosas.
 
 ---
 
-**Última atualização:** Dezembro 2024
+**Última atualização:** Fevereiro 2025 - v2.1.0

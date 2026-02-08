@@ -21,7 +21,7 @@ export default function Projector() {
   const { currentSlide, isBlackout, setSlide, setBlackout } = useProjectionStore();
   const { fonteVersiculo, fonteHino, loadSettings } = useSettingsStore();
   const [showHelp, setShowHelp] = useState(true);
-  
+
   // Carregar configurações ao montar
   useEffect(() => {
     loadSettings();
@@ -38,15 +38,15 @@ export default function Projector() {
   // Entrar em fullscreen automaticamente quando receber conteúdo
   useEffect(() => {
     const hasContent = currentSlide.text || (currentSlide.slides && currentSlide.slides.length > 0);
-    
+
     if (hasContent && !document.fullscreenElement) {
       document.documentElement.requestFullscreen().catch(() => {
         const handleUserInteraction = () => {
-          document.documentElement.requestFullscreen().catch(() => {});
+          document.documentElement.requestFullscreen().catch(() => { });
           document.removeEventListener('click', handleUserInteraction);
           document.removeEventListener('keydown', handleUserInteraction);
         };
-        
+
         document.addEventListener('click', handleUserInteraction, { once: true });
         document.addEventListener('keydown', handleUserInteraction, { once: true });
       });
@@ -59,11 +59,11 @@ export default function Projector() {
     socketInstance.on('render_slide', (data) => {
       setSlide(data);
       setBlackout(false);
-      
+
       if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen().catch(() => {
           const handleInteraction = () => {
-            document.documentElement.requestFullscreen().catch(() => {});
+            document.documentElement.requestFullscreen().catch(() => { });
             document.removeEventListener('click', handleInteraction);
             document.removeEventListener('keydown', handleInteraction);
           };
@@ -106,15 +106,15 @@ export default function Projector() {
   // Obter dados do slide atual
   const getCurrentSlideData = () => {
     if (isBlackout) return { text: '', isRefrain: false, versiculo: null, parte: null };
-    
+
     if (currentSlide.slides && currentSlide.slides.length > 0) {
       const slideIndex = currentSlide.currentSlideIndex || 0;
       const slide = currentSlide.slides[slideIndex] || currentSlide.slides[0];
-      
+
       if (slide && typeof slide === 'object' && !Array.isArray(slide)) {
         if ('text' in slide) {
-          return { 
-            text: String(slide.text || ''), 
+          return {
+            text: String(slide.text || ''),
             isRefrain: slide.isRefrain || false,
             versiculo: slide.versiculo || null,
             parte: slide.parte || null,
@@ -124,12 +124,12 @@ export default function Projector() {
           return { text: '', isRefrain: false, versiculo: null, parte: null };
         }
       }
-      
+
       if (typeof slide === 'string') {
         return { text: slide, isRefrain: false, versiculo: null, parte: null };
       }
     }
-    
+
     const text = currentSlide.text;
     if (typeof text === 'string') {
       return { text, isRefrain: false, versiculo: null, parte: null };
@@ -137,31 +137,30 @@ export default function Projector() {
     if (text && typeof text === 'object' && 'text' in text) {
       return { text: String(text.text || ''), isRefrain: text.isRefrain || false, versiculo: null, parte: null };
     }
-    
+
     return { text: '', isRefrain: false, versiculo: null, parte: null };
   };
 
   const { text: slideText, isRefrain, versiculo: slideVersiculo, parte: slideParte } = getCurrentSlideData();
-  
+
   // Determinar o tipo de conteúdo
   const slideType = currentSlide.type || 'default';
   const isHino = slideType === 'hino';
   const isVerse = slideType === 'verse';
   const isAnuncio = slideType === 'anuncio';
-  
+
   // CSS class baseada no tipo
-  const containerClass = `projector-container ${
-    isHino ? 'projector-hino' : 
-    isVerse ? 'projector-verse' : 
-    isAnuncio ? 'projector-anuncio' :
-    'projector-default'
-  }`;
+  const containerClass = `projector-container ${isHino ? 'projector-hino' :
+      isVerse ? 'projector-verse' :
+        isAnuncio ? 'projector-anuncio' :
+          'projector-default'
+    }`;
 
   // Metadados do hino
   const hinoNumero = currentSlide.metadata?.numero || '';
   const hinoNome = currentSlide.metadata?.hino || '';
   const hasHinoContent = isHino && slideText;
-  
+
   // Metadados do anúncio
   const anuncioNome = currentSlide.metadata?.nome || '';
   const anuncioReferencias = currentSlide.metadata?.referencias || [];
@@ -207,9 +206,9 @@ export default function Projector() {
                       slideText.split('\n').map((line, index) => {
                         const isRefrainLine = line.trim().startsWith('*');
                         const displayLine = isRefrainLine ? line.replace(/^\*+/, '').trim() : line.trim();
-                        
+
                         if (!displayLine) return null;
-                        
+
                         return (
                           <div
                             key={index}
@@ -220,7 +219,7 @@ export default function Projector() {
                         );
                       })
                     )}
-                    
+
                     {/* Referência do versículo (apenas para Bíblia) */}
                     {isVerse && currentSlide.metadata?.livro && (
                       <div className="verse-reference">
@@ -241,11 +240,10 @@ export default function Projector() {
                   </div>
                 )}
               </div>
-              
+
               {/* Barra Musical com TEXTO DO HINO ESTÁTICO (apenas para Hinos) */}
               {hasHinoContent && (
                 <div className="music-bar">
-                  <span className="music-notes">🎵 ♪ 🎶</span>
                   <div className="music-bar-content">
                     <span className={`music-bar-text ${isRefrain ? 'refrain' : ''}`}>
                       {slideText}
@@ -255,7 +253,7 @@ export default function Projector() {
               )}
             </>
           )}
-          
+
           {/* Indicador de slide atual */}
           {currentSlide.totalSlides > 1 && (
             <div className="slide-indicator">

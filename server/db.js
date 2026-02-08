@@ -24,7 +24,7 @@ const queries = {
   createHinario: db.prepare('INSERT INTO hinario (nome, type) VALUES (?, ?)'),
   updateHinario: db.prepare('UPDATE hinario SET nome = ?, type = ? WHERE id = ?'),
   deleteHinario: db.prepare('DELETE FROM hinario WHERE id = ?'),
-  
+
   // ==========================================
   // HINOS
   // ==========================================
@@ -36,7 +36,7 @@ const queries = {
   createHino: db.prepare('INSERT INTO hino (hinario_id, numero, nome, texto) VALUES (?, ?, ?, ?)'),
   updateHino: db.prepare('UPDATE hino SET hinario_id = ?, numero = ?, nome = ?, texto = ? WHERE id = ?'),
   deleteHino: db.prepare('DELETE FROM hino WHERE id = ?'),
-  
+
   // ==========================================
   // BÍBLIA
   // ==========================================
@@ -48,14 +48,14 @@ const queries = {
   getCapitulosByLivro: db.prepare('SELECT DISTINCT capitulo FROM Biblia WHERE livroid = ? ORDER BY capitulo'),
   searchVersiculosByText: db.prepare('SELECT b.codigo, b.livroid, b.capitulo, b.versiculo, b.texto, l.livros as livro_nome FROM Biblia b JOIN Biblia_Livros l ON b.livroid = l.id WHERE b.texto LIKE ? ORDER BY b.livroid, b.capitulo, b.versiculo LIMIT 50'),
   getVersiculosRange: db.prepare('SELECT codigo, livroid, capitulo, versiculo, texto FROM Biblia WHERE livroid = ? AND capitulo = ? AND versiculo >= ? AND versiculo <= ? ORDER BY versiculo'),
-  
+
   // ==========================================
   // CONFIGURAÇÕES
   // ==========================================
   getSetting: db.prepare('SELECT valor FROM settings WHERE chave = ?'),
   getAllSettings: db.prepare('SELECT chave, valor FROM settings'),
   setSetting: db.prepare('INSERT OR REPLACE INTO settings (chave, valor, atualizado_em) VALUES (?, ?, ?)'),
-  
+
   // ==========================================
   // LEITURAS SALVAS
   // ==========================================
@@ -64,13 +64,13 @@ const queries = {
   createLeitura: db.prepare('INSERT INTO leituras (nome) VALUES (?)'),
   updateLeitura: db.prepare('UPDATE leituras SET nome = ?, atualizado_em = ? WHERE id = ?'),
   deleteLeitura: db.prepare('DELETE FROM leituras WHERE id = ?'),
-  
+
   // Versículos das leituras
   getLeituraVersiculos: db.prepare('SELECT id, leitura_id, livro_id, livro_nome, capitulo, versiculo_inicio, versiculo_fim, ordem FROM leitura_versiculos WHERE leitura_id = ? ORDER BY ordem'),
   addLeituraVersiculo: db.prepare('INSERT INTO leitura_versiculos (leitura_id, livro_id, livro_nome, capitulo, versiculo_inicio, versiculo_fim, ordem) VALUES (?, ?, ?, ?, ?, ?, ?)'),
   deleteLeituraVersiculos: db.prepare('DELETE FROM leitura_versiculos WHERE leitura_id = ?'),
   deleteLeituraVersiculo: db.prepare('DELETE FROM leitura_versiculos WHERE id = ?'),
-  
+
   // ==========================================
   // ANÚNCIOS
   // ==========================================
@@ -79,7 +79,7 @@ const queries = {
   createAnuncio: db.prepare('INSERT INTO anuncios (nome, titulo) VALUES (?, ?)'),
   updateAnuncio: db.prepare('UPDATE anuncios SET nome = ?, titulo = ? WHERE id = ?'),
   deleteAnuncio: db.prepare('DELETE FROM anuncios WHERE id = ?'),
-  
+
   // Versículos dos anúncios
   getAnuncioVersiculos: db.prepare('SELECT id, anuncio_id, livro_id, livro_nome, capitulo, versiculo_inicio, versiculo_fim, ordem FROM anuncio_versiculos WHERE anuncio_id = ? ORDER BY ordem'),
   addAnuncioVersiculo: db.prepare('INSERT INTO anuncio_versiculos (anuncio_id, livro_id, livro_nome, capitulo, versiculo_inicio, versiculo_fim, ordem) VALUES (?, ?, ?, ?, ?, ?, ?)'),
@@ -87,15 +87,6 @@ const queries = {
   deleteAnuncioVersiculo: db.prepare('DELETE FROM anuncio_versiculos WHERE id = ?'),
 };
 
-/**
- * Converte texto para CAIXA ALTA (maiúsculas)
- * @param {string} texto - Texto a ser convertido
- * @returns {string} Texto em maiúsculas
- */
-export function converterParaMaiusculas(texto) {
-  if (!texto) return texto;
-  return texto.toUpperCase();
-}
 
 /**
  * Processa o texto de um hino e divide em slides
@@ -104,15 +95,11 @@ export function converterParaMaiusculas(texto) {
  * - Linhas que começam com * são refrão/coro (marcadas como isRefrain)
  * - Linhas vazias são ignoradas
  * - Linhas muito longas (> 60 chars) são divididas automaticamente
- * - TODO TEXTO É CONVERTIDO PARA CAIXA ALTA (MAIÚSCULAS)
  * @param {string} texto - Texto completo do hino
  * @returns {Array} Array de slides, cada slide contém { text, isRefrain }
  */
 export function processarHinoEmSlides(texto) {
   if (!texto) return [];
-
-  // CONVERTER TODO TEXTO PARA CAIXA ALTA (MAIÚSCULAS)
-  texto = converterParaMaiusculas(texto);
 
   const slides = [];
 
