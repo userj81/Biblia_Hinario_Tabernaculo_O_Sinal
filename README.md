@@ -92,13 +92,20 @@ npm run dev
 ### **Opção 3: Scripts de Inicialização**
 
 ```batch
-# Inicialização simples (recomendado)
+# Inicialização com Feedback Visual (Recomendado)
 .\iniciar-sistema.bat
 
-# Inicialização avançada (com logs)
+# Inicialização avançada (PowerShell)
 .\Start-BibliaHinario.ps1
 ```
 
+> [!TIP]
+> **Novo Recurso:** O sistema agora conta com um script de feedback visual (`Start-WithFeedback.ps1`) que exibe uma barra de progresso e confirmação verde quando o sistema está online e pronto para uso.
+
+---
+
+### **🚀 Atalho na Área de Trabalho**
+Para facilitar o uso diário, o sistema agora permite a criação de um atalho diretamente na Área de Trabalho. Basta clicar duas vezes no ícone **"Bíblia e Hinário"** para iniciar o servidor e ver o progresso de carregamento.
 **Para inicialização automática ao ligar PC:**
 ```powershell
 # Execute como administrador (uma vez só)

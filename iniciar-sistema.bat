@@ -77,8 +77,8 @@ echo.
 echo 🔴 Para parar o sistema, feche esta janela ou pressione Ctrl+C
 echo.
 
-REM Inicia o sistema
-npm run dev
+REM Inicia o sistema com feedback visual
+powershell.exe -ExecutionPolicy Bypass -File ".\Start-WithFeedback.ps1"
 
 echo.
 echo 👋 Sistema encerrado.
