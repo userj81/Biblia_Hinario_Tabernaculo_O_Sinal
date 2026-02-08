@@ -190,7 +190,7 @@ export default function Admin() {
       {/* Content - Responsivo */}
       <div className="flex-1 overflow-hidden flex bg-gray-50">
         {/* Main Content */}
-        <div className="flex-1 p-3 md:p-6 overflow-hidden mobile-content-padding">
+        <div className="flex-1 p-3 md:p-6 overflow-hidden mobile-content-padding-large">
           <div className="bg-white rounded-xl border border-gray-200 h-full overflow-hidden shadow-sm">
             {activeTab === 'hinos' && <HymnTab />}
             {activeTab === 'biblia' && <BibleTab />}

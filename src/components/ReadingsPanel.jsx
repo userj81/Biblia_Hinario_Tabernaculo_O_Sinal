@@ -5,7 +5,7 @@ import { useProjectionStore } from '../stores/projectionStore';
 import ReadingEditor from './ReadingEditor';
 
 /**
- * Painel de Leituras Salvas
+ * Painel de Leituras Salvas - Formato Carrossel Horizontal
  * Exibido acima da lista de livros na aba Bíblia
  */
 export default function ReadingsPanel() {
@@ -13,7 +13,6 @@ export default function ReadingsPanel() {
   const [loading, setLoading] = useState(false);
   const [showEditor, setShowEditor] = useState(false);
   const [editingReading, setEditingReading] = useState(null);
-  const [expanded, setExpanded] = useState(false);
   const { setSlide } = useProjectionStore();
 
   // Carregar leituras
@@ -90,7 +89,7 @@ export default function ReadingsPanel() {
     loadLeituras();
   };
 
-  // Formatação das referências
+  // Formatação das referências (versão compacta)
   const formatReferences = (versiculos) => {
     if (!versiculos || versiculos.length === 0) return '';
     return versiculos.map(v => {
@@ -101,113 +100,117 @@ export default function ReadingsPanel() {
     }).join(' • ');
   };
 
-  return (
-    <div className="mb-4">
-      {/* Header colapsável */}
-      <button
-        onClick={() => setExpanded(!expanded)}
-        className="w-full flex items-center justify-between p-3 bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg border border-amber-200 hover:border-amber-300 transition-colors"
-      >
-        <div className="flex items-center gap-2">
-          <span className="text-lg">📌</span>
-          <span className="font-medium text-gray-800">Leituras Salvas</span>
-          <span className="text-xs text-gray-500 bg-white px-2 py-0.5 rounded-full">
-            {leituras.length}
-          </span>
+  if (loading) {
+    return (
+      <div className="mb-3">
+        <div className="p-4 text-center text-gray-400 text-sm">
+          Carregando leituras...
         </div>
-        <svg
-          className={`w-5 h-5 text-gray-500 transition-transform ${expanded ? 'rotate-180' : ''}`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
+      </div>
+    );
+  }
 
-      {/* Conteúdo expandido */}
-      {expanded && (
-        <div className="mt-2 bg-white rounded-lg border border-gray-200 overflow-hidden">
-          {/* Botão Nova Leitura */}
-          <div className="p-3 border-b border-gray-100">
+  return (
+    <div className="mb-3">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-2">
+        <h3 className="text-xs font-medium text-amber-700 uppercase tracking-wide">
+          📌 Leituras Salvas ({leituras.length})
+        </h3>
+        <button
+          onClick={() => setShowEditor(true)}
+          className="p-1.5 bg-amber-500 hover:bg-amber-600 rounded-lg text-white transition-colors active:scale-95"
+          title="Nova Leitura"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Carrossel Horizontal */}
+      <div className="relative">
+        {leituras.length > 0 ? (
+          <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-thin">
+            {leituras.map((leitura) => (
+              <div
+                key={leitura.id}
+                className="flex-shrink-0 w-[280px] bg-amber-50 border-2 border-amber-200 rounded-xl p-3 snap-center transition-all hover:shadow-md"
+              >
+                {/* Nome da leitura */}
+                <h4 className="text-sm font-bold text-amber-900 mb-2 line-clamp-1">
+                  {leitura.nome}
+                </h4>
+
+                {/* Referências compactas */}
+                <div className="text-xs text-amber-700 mb-3 line-clamp-2">
+                  {formatReferences(leitura.versiculos)}
+                </div>
+
+                {/* Ações */}
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => handleProjetar(leitura)}
+                    className="flex-1 py-2 bg-amber-500 hover:bg-amber-600 rounded-lg text-white text-xs font-medium flex items-center justify-center gap-1 transition-colors active:scale-95"
+                    title="Projetar"
+                  >
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Projetar
+                  </button>
+                  <button
+                    onClick={() => handleEdit(leitura)}
+                    className="p-2 bg-white border border-amber-300 rounded-lg text-amber-700 hover:bg-amber-50 transition-colors active:scale-95"
+                    title="Editar"
+                  >
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => handleDelete(leitura.id)}
+                    className="p-2 bg-white border border-red-300 rounded-lg text-red-600 hover:bg-red-50 transition-colors active:scale-95"
+                    title="Excluir"
+                  >
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            ))}
+
+            {/* Card "Adicionar" no final */}
             <button
               onClick={() => setShowEditor(true)}
-              className="w-full py-2 px-4 bg-amber-500 hover:bg-amber-600 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+              className="flex-shrink-0 w-[280px] h-full min-h-[120px] bg-amber-100 border-2 border-dashed border-amber-300 rounded-xl flex flex-col items-center justify-center text-amber-600 hover:bg-amber-200 transition-colors active:scale-98"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-8 h-8 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
               </svg>
-              Nova Leitura
+              <span className="text-sm font-medium">Nova Leitura</span>
             </button>
           </div>
-
-          {/* Lista de leituras */}
-          <div className="max-h-64 overflow-y-auto">
-            {loading ? (
-              <div className="p-4 text-center text-gray-400">
-                Carregando...
-              </div>
-            ) : leituras.length === 0 ? (
-              <div className="p-4 text-center text-gray-400">
-                <p className="text-sm">Nenhuma leitura salva</p>
-                <p className="text-xs mt-1">Clique em "Nova Leitura" para criar</p>
-              </div>
-            ) : (
-              <div className="divide-y divide-gray-100">
-                {leituras.map((leitura) => (
-                  <div
-                    key={leitura.id}
-                    className="p-3 hover:bg-gray-50 transition-colors"
-                  >
-                    <div className="flex items-start justify-between gap-2">
-                      <div className="flex-1 min-w-0">
-                        <h4 className="font-medium text-gray-800 truncate">
-                          {leitura.nome}
-                        </h4>
-                        <p className="text-xs text-gray-500 mt-1 truncate">
-                          {formatReferences(leitura.versiculos)}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <button
-                          onClick={() => handleProjetar(leitura)}
-                          className="p-1.5 text-green-600 hover:bg-green-50 rounded-lg transition-colors"
-                          title="Projetar"
-                        >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                        </button>
-                        <button
-                          onClick={() => handleEdit(leitura)}
-                          className="p-1.5 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                          title="Editar"
-                        >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                          </svg>
-                        </button>
-                        <button
-                          onClick={() => handleDelete(leitura.id)}
-                          className="p-1.5 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                          title="Excluir"
-                        >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
+        ) : (
+          // Empty state - Compacto
+          <div className="text-center py-3 bg-amber-50/50 border border-dashed border-amber-200 rounded-lg">
+            <p className="text-amber-600 text-xs mb-2">
+              <span className="mr-1">📖</span>
+              Nenhuma leitura salva
+            </p>
+            <button
+              onClick={() => setShowEditor(true)}
+              className="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg text-xs font-medium transition-colors active:scale-95"
+            >
+              + Criar Leitura
+            </button>
           </div>
-        </div>
-      )}
+        )}
+      </div>
 
-      {/* Modal Editor */}
+      {/* Modal Editor - SEM ALTERAÇÃO */}
       {showEditor && (
         <ReadingEditor
           reading={editingReading}
@@ -217,4 +220,3 @@ export default function ReadingsPanel() {
     </div>
   );
 }
-
