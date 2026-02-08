@@ -191,3 +191,13 @@ function dividirLinhaLonga(texto, isRefrain) {
 export default db;
 export { queries };
 
+
+/**
+ * Converte texto para MAIÚSCULAS
+ * @param {string} texto - Texto a ser convertido  
+ * @returns {string} Texto em maiúsculas
+ */
+export function converterParaMaiusculas(texto) {
+  if (!texto) return '';
+  return texto.toUpperCase();
+}
